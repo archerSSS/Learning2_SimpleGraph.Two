@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.28010.2048
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmsDataStructures2", "AlgorithmsDataStructures2\AlgorithmsDataStructures2.csproj", "{0F293AFD-FD39-4BA2-88BB-65B62E84F885}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgoTest_1", "AlgoTest_1\AlgoTest_1.csproj", "{CA799B27-1E56-4361-846D-30DFFE4FC04C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{0F293AFD-FD39-4BA2-88BB-65B62E84F885}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0F293AFD-FD39-4BA2-88BB-65B62E84F885}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0F293AFD-FD39-4BA2-88BB-65B62E84F885}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA799B27-1E56-4361-846D-30DFFE4FC04C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA799B27-1E56-4361-846D-30DFFE4FC04C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA799B27-1E56-4361-846D-30DFFE4FC04C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA799B27-1E56-4361-846D-30DFFE4FC04C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
