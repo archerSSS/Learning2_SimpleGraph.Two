@@ -16,7 +16,6 @@ namespace AlgorithmsDataStructures2
 
     public class SimpleGraph<T>
     {
-        // ...
         Stack<Vertex<T>> stack;
         public Vertex<T>[] vertex;
         public int[,] m_adjacency;
@@ -91,13 +90,8 @@ namespace AlgorithmsDataStructures2
         {
             ClearStackData();
             List<Vertex<T>> list = new List<Vertex<T>>();
-            if (NextVert(VFrom, VTo)) return StackToList(stack, list);
-
-
-            // Узлы задаются позициями в списке vertex.
-            // Возвращается список узлов -- путь из VFrom в VTo.
-            // Список пустой, если пути нету.
-            return list;
+            if (NextVert(VFrom, VTo)) stack.Push(vertex[VTo]);
+            return StackToList(stack, list);
         }
 
         private void ClearStackData()
@@ -112,14 +106,6 @@ namespace AlgorithmsDataStructures2
             stack.Push(vertex[VPres]);
             for (int i = 0; i < max_vertex; i++) if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
             stack.Pop().Hit = false;
-            return false;
-        }
-        
-        private bool AddVertexStack(int index, int VTo, Stack<Vertex<T>> stack)
-        {
-            vertex[index].Hit = true;
-            stack.Push(vertex[index]);
-            if (index == VTo) return true;
             return false;
         }
 
