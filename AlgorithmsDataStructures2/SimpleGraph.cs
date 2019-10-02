@@ -105,7 +105,7 @@ namespace AlgorithmsDataStructures2
             vertex[VPres].Hit = true;
             stack.Push(vertex[VPres]);
             for (int i = 0; i < max_vertex; i++) if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
-            stack.Pop().Hit = false;
+            stack.Pop();
             return false;
         }
 

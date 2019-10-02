@@ -10,22 +10,32 @@ namespace AlgorithmsDataStructures2
     {
         public static void Main(string[] args)
         {
-            int a1 = 12 | 7;     //  
-            int a2 = 5 ^ 10;       // 
-            int a3 = 3 & 8;     // 
-            int a4 = 14 << 2;   // 
+            int a1 = 5 | 9;     //  13
+            int a2 = 3 ^ 7;       // 4
+            int a3 = 10 & 12;     // 8
+            int a4 = 4 << 2;   // 16
 
-            int b1 = -6 | 9;     // 
-            int b2 = -8 ^ 13;   // -
-            int b3 = -4 & 11;   // 
-            int b4 = 6 >> 2;    // 
+            int b1 = -7 | 13;     // -3 
+            int b2 = -8 ^ 5;   // -3
+            int b3 = -10 & 3;   // 2
+            int b4 = 12 >> 2;    // 3
 
-            int c1 = -15 | -7;  // 
-            int c2 = -5 ^ -10;   // 
-            int c3 = -9 & -3;   // -
-            int c4 = -11 << 2;  // -
+            int c1 = -7 | -14;  // -5
+            int c2 = -4 ^ -11;   // 9
+            int c3 = -5 & -8;   // -8
+            int c4 = -15 << 2;  // -60
 
-            int d = -14 >> 2;   // -
+            int d = -7 >> 2;   // -2
+
+
+            float[] array = new float[30];
+            float x = 0;
+
+            for (int i = 0; i < 30; i++)
+            {
+                array[i] = 3 * x - (x * x);
+                x += 0.1f;
+            }
         }
     }
 }

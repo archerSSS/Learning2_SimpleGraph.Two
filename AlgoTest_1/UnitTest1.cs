@@ -51,19 +51,16 @@ namespace AlgoTest_1
 
         }
 
+        // -- Поиск первого попавшегося пути от одной точки к другой.
+        // -- Для примера взят граф 10х10.
+        //
         [TestMethod]
         public void TestGraphSearch_2()
         {
             int a1 = 1;
-            int a2 = 2;
-            int a3 = 3;
             int a4 = 4;
-            int a5 = 5;
-            int a6 = 6;
             int a7 = 7;
-            int a8 = 8;
             int a9 = 9;
-            int a10 = 10;
             int[] array = new int[] { a4, a1, a7, a9 };
 
             SimpleGraph<int> graph = GetSimpleGraph();
@@ -72,7 +69,66 @@ namespace AlgoTest_1
             List<Vertex<int>> list = graph.DepthFirstSearch(3, 8);
             foreach (Vertex<int> ver in list)
                 Assert.AreEqual(array[count++], ver.Value);
+        }
 
+        // -- Измененный вариант предыдущего теста.
+        // -- Поиск пути с теми же аргументами, удалено ребро между вершинами (0, 6)
+        //
+        [TestMethod]
+        public void TestGraphSearch_3()
+        {
+            int a2 = 2;
+            int a3 = 3;
+            int a4 = 4;
+            int a6 = 6;
+            int a9 = 9;
+            int[] array = new int[] { a4, a2, a6, a3, a9 };
+
+            SimpleGraph<int> graph = GetSimpleGraph();
+            graph.RemoveEdge(0, 6);
+
+            int count = 0;
+            List<Vertex<int>> list = graph.DepthFirstSearch(3, 8);
+            foreach (Vertex<int> ver in list)
+                Assert.AreEqual(array[count++], ver.Value);
+        }
+        
+        // Урезанное количество рёбер.
+        //
+        [TestMethod]
+        public void TestGraphSearch_4()
+        {
+            int a2 = 2;
+            int a4 = 4;
+            int[] array = new int[] { 0, a4, a2, a4, 0 };
+
+            SimpleGraph<int> graph = GetSimpleGraph();
+            graph.RemoveEdge(0, 6);
+            graph.RemoveEdge(1, 5);
+            graph.RemoveEdge(2, 5);
+            graph.RemoveEdge(5, 9);
+            graph.RemoveEdge(6, 8);
+
+            int count = 0;
+            List<Vertex<int>> list = graph.DepthFirstSearch(3, 8);
+            Assert.AreEqual(0, list.Count);
+            foreach (Vertex<int> ver in list)
+                Assert.AreEqual(array[count++], ver.Value);
+        }
+
+        // Поиск некоторого пути.
+        //
+        [TestMethod]
+        public void TestGraphSearch_5()
+        {
+            int[] array = new int[] { 8, 2, 4, 1, 7, 9, 3, 6 };
+
+            SimpleGraph<int> graph = GetSimpleGraph();
+
+            int count = 0;
+            List<Vertex<int>> list = graph.DepthFirstSearch(7, 5);
+            foreach (Vertex<int> ver in list)
+                Assert.AreEqual(array[count++], ver.Value);
         }
 
 
@@ -94,7 +150,7 @@ namespace AlgoTest_1
          *      
          *      0   1   0   0   0   1   0   0   0   0
          *      
-         *      0   0   0   0   0   0   1   0   0   1
+         *      0   0   1   0   0   0   1   0   0   1
          *      
          *      0   0   1   0   0   1   0   0   1   0
          * 
