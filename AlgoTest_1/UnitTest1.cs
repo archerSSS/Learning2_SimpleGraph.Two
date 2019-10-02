@@ -131,6 +131,27 @@ namespace AlgoTest_1
                 Assert.AreEqual(array[count++], ver.Value);
         }
 
+        // Проведение поиска пути два раза (Очищаются ли данные о Hit вершин и Стак).
+        //
+        [TestMethod]
+        public void TestGraphSearch_6()
+        {
+            int[] array = new int[] { 3, 6, 2, 5 };
+            int[] array2 = new int[] { 4, 1, 7, 9 };
+
+            SimpleGraph<int> graph = GetSimpleGraph();
+
+            int count = 0;
+            List<Vertex<int>> list = graph.DepthFirstSearch(2, 4);
+            foreach (Vertex<int> ver in list)
+                Assert.AreEqual(array[count++], ver.Value);
+
+            count = 0;
+            List<Vertex<int>> list2 = graph.DepthFirstSearch(3, 8);
+            foreach (Vertex<int> ver in list2)
+                Assert.AreEqual(array2[count++], ver.Value);
+        }
+
 
         /*
          * 

@@ -100,19 +100,58 @@ namespace AlgorithmsDataStructures2
             for (int i = 0; i < max_vertex; i++) vertex[i].Hit = false;
         }
 
+        // -- Добавляет указанную вершину в стак.
+        // -- Проводит проверку внутри цикла Cyc.
+        //
         private bool NextVert(int VPres, int VTo)
         {
-            vertex[VPres].Hit = true;
-            stack.Push(vertex[VPres]);
-            for (int i = 0; i < max_vertex; i++) if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
-            stack.Pop();
-            return false;
+            if (AVS(VPres) && Cyc(0, VPres, VTo)) return true;
+            return RVS();
         }
 
+        // Копирует вершины из указанного Стака в стандартный Список
+        //
         private List<Vertex<T>> StackToList(Stack<Vertex<T>> stack, List<Vertex<T>> list)
         {
             for (int i = stack.dyn.count - 1; i > -1; i--) list.Add(stack.dyn.array[i]);
             return list;
+        }
+
+        // -- Альтернатива циклу for.
+        // -- Также проверяет на наличие ребра у указанных вершин - ожидается true
+        //          был ли проведен обход по указанной вершине - ожидается false
+        //              и является эта вершина искомой.
+        // -- Если все условия кроме последнего удовлетворены, то проводится проверка следующей выбранной вершины.
+        //
+        private bool Cyc(int i, int VPres, int VTo)
+        {
+            if (IsOver(i)) return false;
+            else if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
+            return Cyc(i + 1, VPres, VTo);
+        }
+
+        // Add Vertix to Stack
+        //
+        private bool AVS(int i)
+        {
+            vertex[i].Hit = true;
+            stack.Push(vertex[i]);
+            return true;
+        }
+
+        // Remove Vertex from Stack
+        //
+        private bool RVS()
+        {
+            stack.Pop();
+            return false;
+        }
+
+        // Проводит проверку на завершение цикла
+        //
+        private bool IsOver(int i)
+        {
+            return i >= max_vertex;
         }
     }
 
