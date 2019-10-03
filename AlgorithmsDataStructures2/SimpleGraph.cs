@@ -52,7 +52,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public bool IsEdge(int v1, int v2)
+        public bool HaveEdge(int v1, int v2)
         {
             if (IsInRange(v1, v2)) return m_adjacency[v1, v2] == 1 && m_adjacency[v2, v1] == 1;
             return false;
@@ -126,7 +126,7 @@ namespace AlgorithmsDataStructures2
         private bool Cyc(int i, int VPres, int VTo)
         {
             if (IsOver(i)) return false;
-            else if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
+            else if (!vertex[i].Hit && HaveEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
             return Cyc(i + 1, VPres, VTo);
         }
 

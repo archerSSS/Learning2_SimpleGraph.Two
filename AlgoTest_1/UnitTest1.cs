@@ -48,7 +48,7 @@ namespace AlgoTest_1
             List<Vertex<int>> list = graph.DepthFirstSearch(0, 5);
             foreach (Vertex<int> ver in list)
                 Assert.AreEqual(array[count++], ver.Value);
-
+            Assert.AreEqual(4, list.Count);
         }
 
         // -- Поиск первого попавшегося пути от одной точки к другой.
@@ -69,6 +69,7 @@ namespace AlgoTest_1
             List<Vertex<int>> list = graph.DepthFirstSearch(3, 8);
             foreach (Vertex<int> ver in list)
                 Assert.AreEqual(array[count++], ver.Value);
+            Assert.AreEqual(4, list.Count);
         }
 
         // -- Измененный вариант предыдущего теста.
@@ -91,6 +92,7 @@ namespace AlgoTest_1
             List<Vertex<int>> list = graph.DepthFirstSearch(3, 8);
             foreach (Vertex<int> ver in list)
                 Assert.AreEqual(array[count++], ver.Value);
+            Assert.AreEqual(5, list.Count);
         }
         
         // Урезанное количество рёбер.
@@ -129,6 +131,7 @@ namespace AlgoTest_1
             List<Vertex<int>> list = graph.DepthFirstSearch(7, 5);
             foreach (Vertex<int> ver in list)
                 Assert.AreEqual(array[count++], ver.Value);
+            Assert.AreEqual(8, list.Count);
         }
 
         // Проведение поиска пути два раза (Очищаются ли данные о Hit вершин и Стак).
@@ -145,11 +148,12 @@ namespace AlgoTest_1
             List<Vertex<int>> list = graph.DepthFirstSearch(2, 4);
             foreach (Vertex<int> ver in list)
                 Assert.AreEqual(array[count++], ver.Value);
-
+            Assert.AreEqual(4, list.Count);
             count = 0;
             List<Vertex<int>> list2 = graph.DepthFirstSearch(3, 8);
             foreach (Vertex<int> ver in list2)
                 Assert.AreEqual(array2[count++], ver.Value);
+            Assert.AreEqual(4, list2.Count);
         }
 
 
