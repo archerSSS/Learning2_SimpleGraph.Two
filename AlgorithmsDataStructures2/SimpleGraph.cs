@@ -16,7 +16,7 @@ namespace AlgorithmsDataStructures2
 
     public class SimpleGraph<T>
     {
-        Stack<Vertex<T>> stack;
+        public Stack<Vertex<T>> stack;
         public Vertex<T>[] vertex;
         public int[,] m_adjacency;
         public int max_vertex;
@@ -52,7 +52,7 @@ namespace AlgorithmsDataStructures2
             }
         }
 
-        public bool HaveEdge(int v1, int v2)
+        public bool IsEdge(int v1, int v2)
         {
             if (IsInRange(v1, v2)) return m_adjacency[v1, v2] == 1 && m_adjacency[v2, v1] == 1;
             return false;
@@ -76,6 +76,14 @@ namespace AlgorithmsDataStructures2
             }
         }
 
+        public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
+        {
+            ClearStackData();
+            List<Vertex<T>> list = new List<Vertex<T>>();
+            if (NextVert(VFrom, VTo)) stack.Push(vertex[VTo]);
+            return StackToList(stack, list);
+        }
+
         private bool IsInRange(int v)
         {
             return v < max_vertex;
@@ -84,14 +92,6 @@ namespace AlgorithmsDataStructures2
         private bool IsInRange(int a, int b)
         {
             return a < max_vertex && b < max_vertex;
-        }
-
-        public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
-        {
-            ClearStackData();
-            List<Vertex<T>> list = new List<Vertex<T>>();
-            if (NextVert(VFrom, VTo)) stack.Push(vertex[VTo]);
-            return StackToList(stack, list);
         }
 
         private void ClearStackData()
@@ -126,7 +126,7 @@ namespace AlgorithmsDataStructures2
         private bool Cyc(int i, int VPres, int VTo)
         {
             if (IsOver(i)) return false;
-            else if (!vertex[i].Hit && HaveEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
+            else if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
             return Cyc(i + 1, VPres, VTo);
         }
 
@@ -232,7 +232,6 @@ namespace AlgorithmsDataStructures2
         {
             if (index < 0 || index >= count) throw new IndexOutOfRangeException();
             return array[index];
-            return default(T);
         }
 
 
