@@ -16,7 +16,7 @@ namespace AlgorithmsDataStructures2
 
     public class SimpleGraph<T>
     {
-        //public Stack<Vertex<T>> stack;
+        public Stack<Vertex<T>> stack;
         public Vertex<T>[] vertex;
         public int[,] m_adjacency;
         public int max_vertex;
@@ -26,7 +26,7 @@ namespace AlgorithmsDataStructures2
             max_vertex = size;
             m_adjacency = new int[size, size];
             vertex = new Vertex<T>[size];
-            //stack = new Stack<Vertex<T>>();
+            stack = new Stack<Vertex<T>>();
         }
 
         public void AddVertex(T value)
@@ -78,11 +78,11 @@ namespace AlgorithmsDataStructures2
 
         public List<Vertex<T>> DepthFirstSearch(int VFrom, int VTo)
         {
+            ClearStackData();
             List<Vertex<T>> list = new List<Vertex<T>>();
-            Stack<Vertex<T>> stack = new Stack<Vertex<T>>();
             for (int i = 0; i < max_vertex; i++) vertex[i].Hit = false; 
-            if (NextVert(VFrom, VTo, stack)) stack.Push(vertex[VTo]);
-            return StackToList(stack, list);
+            if (NextVert(VFrom, VTo)) stack.Push(vertex[VTo]);
+            return StackToList(list);
         }
 
         private bool IsInRange(int v)
@@ -95,7 +95,7 @@ namespace AlgorithmsDataStructures2
             return a < max_vertex && b < max_vertex;
         }
 
-        private void ClearStackData(Stack<Vertex<T>> stack)
+        private void ClearStackData()
         {
             stack = new Stack<Vertex<T>>();
             for (int i = 0; i < max_vertex; i++) vertex[i].Hit = false;
@@ -104,15 +104,15 @@ namespace AlgorithmsDataStructures2
         // -- Добавляет указанную вершину в стак.
         // -- Проводит проверку внутри цикла Cyc.
         //
-        private bool NextVert(int VPres, int VTo, Stack<Vertex<T>> stack)
+        private bool NextVert(int VPres, int VTo)
         {
-            if (AVS(VPres, stack) && Cyc(0, VPres, VTo, stack)) return true;
-            return RVS(stack);
+            if (AVS(VPres) && Cyc(0, VPres, VTo)) return true;
+            return RVS();
         }
 
         // Копирует вершины из указанного Стака в стандартный Список
         //
-        private List<Vertex<T>> StackToList(Stack<Vertex<T>> stack, List<Vertex<T>> list)
+        private List<Vertex<T>> StackToList(List<Vertex<T>> list)
         {
             for (int i = stack.dyn.count - 1; i > -1; i--) list.Add(stack.dyn.array[i]);
             return list;
@@ -124,16 +124,16 @@ namespace AlgorithmsDataStructures2
         //              и является эта вершина искомой.
         // -- Если все условия кроме последнего удовлетворены, то проводится проверка следующей выбранной вершины.
         //
-        private bool Cyc(int i, int VPres, int VTo, Stack<Vertex<T>> stack)
+        private bool Cyc(int i, int VPres, int VTo)
         {
             if (IsOver(i)) return false;
-            else if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo, stack))) return true;
-            return Cyc(i + 1, VPres, VTo, stack);
+            else if (!vertex[i].Hit && IsEdge(VPres, i) && (i == VTo || NextVert(i, VTo))) return true;
+            return Cyc(i + 1, VPres, VTo);
         }
 
         // Add Vertix to Stack
         //
-        private bool AVS(int i, Stack<Vertex<T>> stack)
+        private bool AVS(int i)
         {
             vertex[i].Hit = true;
             stack.Push(vertex[i]);
@@ -142,7 +142,7 @@ namespace AlgorithmsDataStructures2
 
         // Remove Vertex from Stack
         //
-        private bool RVS(Stack<Vertex<T>> stack)
+        private bool RVS()
         {
             stack.Pop();
             return false;
